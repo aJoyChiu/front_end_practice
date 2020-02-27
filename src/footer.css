@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, section, nav, footer, i, figure {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  background-color: rgb(207, 207, 207);
+}
+
+.textField {
+  margin: 10px;
+}
+
+.btn {
+  margin: 10px;
+}

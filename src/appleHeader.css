@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, section, nav, footer, i, figure {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+}
+
+.header-nav {
+  display: flex;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  justify-content: center;
+  position: fixed;
+  z-index: 5;
+}
+
+.header-nav ul {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+}
+
+.header-nav .nav-item {
+  display: inline-flex;
+  margin: 0 10px;
+  font-size: 14px;
+  font-weight: 400;
+  height: 44px;
+  align-items: center;
+}
+
+.header-nav .nav-item.icon {
+  font-size: 20px;
+}
