@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
 import './App.css';
 import Header from './Header'
-import Post from './container/Post'
+import Post from './component/Post'
 // import Footer from './footer'
 
 const store = configureStore()

@@ -3,7 +3,7 @@ import { AnyAction } from 'redux'
 import { of } from 'rxjs'
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators'
 import { ajax, AjaxResponse } from 'rxjs/ajax'
-import { Post } from '../../model/post'
+import { IncomingPost, Post } from '../../model/post'
 import responseUtil from '../../utils/responseUtil'
 import {
   POST_ACTIONS,
@@ -11,23 +11,17 @@ import {
   createPostSuccess,
   getPostListFailed,
   getPostListSuccess,
+  updatePostSuccess,
+  updatePostFailed,
   deletePostFailed,
   deletePostSuccess,
 } from "../../reducers/post/postAction"
-
-interface IncomingPost {
-  id: string,
-  content: string,
-  created_at: string,
-  updated_at: string,
-  imageUrl: string,
-}
 
 const responseToModel = (resp: IncomingPost): Post => ({
   id: resp.id,
   content: resp.content,
   createAt: resp.created_at,
-  imageUrl: resp.imageUrl,
+  imageUrl: resp.image_url,
 })
 
 const responseToModelList = (resp: any): Post[] =>
@@ -57,6 +51,18 @@ export const getPostListEpic = (action$: ActionsObservable<AnyAction>) =>
     ),
   )
 
+export const updatePostEpic = (action$: ActionsObservable<AnyAction>) =>
+  action$.pipe(
+    ofType(POST_ACTIONS.UPDATE_POST),
+    exhaustMap((action: AnyAction) =>
+      ajax.put(`/v1/posts`, action.payload).pipe(
+        map((res: AjaxResponse) => updatePostSuccess(responseToModel(res.response))),
+        tap(() => responseUtil.success(POST_ACTIONS.UPDATE_POST_SUCCESS)),
+        catchError(() => of(updatePostFailed()))
+      )
+    )
+  )
+
 export const deletePostEpic = (action$: ActionsObservable<AnyAction>) =>
   action$.pipe(
     ofType(POST_ACTIONS.DELETE_POST),
@@ -69,4 +75,4 @@ export const deletePostEpic = (action$: ActionsObservable<AnyAction>) =>
     ),
   )
 
-export default [createPostEpic, getPostListEpic, deletePostEpic]
+export default [createPostEpic, getPostListEpic, updatePostEpic, deletePostEpic]

@@ -16,6 +16,12 @@ export default function postReducer(state: PostState = initState, action: AnyAct
       return { ...state, postList: state.postList.concat(action.payload)}
     case POST_ACTIONS.GET_POST_LIST_SUCCESS:
       return { ...state, postList: action.payload }
+    case POST_ACTIONS.UPDATE_POST_SUCCESS:
+      const updatedPostList = state.postList.map((post: Post) => (post.id === action.payload.id ? action.payload : post))
+      return {
+        ...state,
+        postList: updatedPostList,
+      }
     case POST_ACTIONS.DELETE_POST_SUCCESS:
       return { ...state, postList: state.postList.filter(post => post.id !== action.payload)}
     default:
