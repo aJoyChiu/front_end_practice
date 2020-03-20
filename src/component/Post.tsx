@@ -71,7 +71,7 @@ export default function Posts() {
       <TextField
         id='standard-full-width'
         label='Create Post'
-        style={{ margin: 8, marginTop: 20 }}
+        style={{ marginTop: 20 }}
         placeholder='input content..'
         fullWidth
         variant="outlined"
@@ -84,7 +84,7 @@ export default function Posts() {
       <TextField
         id='standard-full-width'
         label='Post update content'
-        style={{ margin: 8 }}
+        style={{ marginTop: 20 }}
         placeholder='input update content..'
         fullWidth
         variant="outlined"
@@ -97,7 +97,7 @@ export default function Posts() {
       <Button onClick={handleClick} color='primary' variant="outlined" style={{ margin: 8 }}>
         Submit
       </Button>
-      <Box border={1} borderRadius="borderRadius" borderColor="grey.500" style={{ margin: 8, padding: 2 }}>
+      <Box border={1} borderRadius="borderRadius" borderColor="grey.400" style={{ marginTop: 10, padding: 2 }}>
         <Toolbar><Typography style={{ margin: 5 }}>Posts</Typography></Toolbar>
         <List component='nav' aria-label='contacts'>
           {postList.map((post) => (
@@ -110,7 +110,7 @@ export default function Posts() {
                   onClick={handleAvatarClick}
                 />
               </ListItemAvatar>
-              <ListItemText id={post.id} primary={post.content} />
+              <ListItemText id={post.id} primary={post.content} secondary={post.createAt} />
               <ListItemSecondaryAction data-post-id={post.id} onClick={handleDelete}>
                 <IconButton edge='end' aria-label='delete'>
                   <DeleteIcon />
